@@ -1,5 +1,3 @@
-from .leaf import Leaf
-
 class Heap:
   def __init__(self, elements=[], reverse=False):
     self.elements = elements
@@ -11,10 +9,50 @@ class Heap:
     
     i = self.length
     while i > 0:
-      cmp_i = (i-1) // 2
-      if (self.elements[i] < self.elements[cmp_i]) ^ self.reverse:
-        self.elements[i], self.elements[cmp_i] = self.elements[cmp_i], self.elements[i]
-      i = cmp_i
+      i_cmp = (i-1) // 2
+      if (self.elements[i] < self.elements[i_cmp]) ^ self.reverse:
+        self.elements[i], self.elements[i_cmp] = self.elements[i_cmp], self.elements[i]
+      i = i_cmp
 
     self.length += 1
+  
+  def pop(self):
+    if self.is_empty():
+      raise Exception('heap empty')
 
+    self.length -= 1
+    value = self.elements[0]
+    self.elements[0] = self.elements.pop()
+
+    i = 0
+    while i < self.length:
+      i_left = 2*i + 1
+      i_right = i_left + 1
+
+      if i_left > self.length - 1:
+        break
+      elif i_right > self.length - 1:
+        i_cmp = i_left
+      else:
+        i_cmp = i_left if (self.elements[i_left] < self.elements[i_right])^self.reverse else i_right
+
+      if (self.elements[i] < self.elements[i_cmp]) ^ self.reverse:
+        self.elements[i], self.elements[i_cmp] = self.elements[i_cmp], self.elements[i]
+
+      i = i_cmp
+
+    return value
+
+  def is_empty(self):
+    return self.length == 0
+
+h = Heap()
+h.add(3)
+h.add(2)
+h.add(5)
+h.add(1)
+print(h.elements)
+
+while not h.is_empty():
+  print(h.pop())
+  print(h.elements)
