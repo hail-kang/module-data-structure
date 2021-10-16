@@ -22,7 +22,8 @@ class Heap:
 
     self.length -= 1
     value = self.elements[0]
-    self.elements[0] = self.elements.pop()
+    self.elements[0] = self.elements[self.length]
+    self.elements.pop()
 
     i = 0
     while i < self.length:
@@ -34,9 +35,9 @@ class Heap:
       elif i_right > self.length - 1:
         i_cmp = i_left
       else:
-        i_cmp = i_left if (self.elements[i_left] < self.elements[i_right])^self.reverse else i_right
+        i_cmp = i_left if (self.elements[i_left] < self.elements[i_right]) ^ self.reverse else i_right
 
-      if (self.elements[i] < self.elements[i_cmp]) ^ self.reverse:
+      if (self.elements[i] > self.elements[i_cmp]) ^ self.reverse:
         self.elements[i], self.elements[i_cmp] = self.elements[i_cmp], self.elements[i]
 
       i = i_cmp
@@ -45,14 +46,3 @@ class Heap:
 
   def is_empty(self):
     return self.length == 0
-
-h = Heap()
-h.add(3)
-h.add(2)
-h.add(5)
-h.add(1)
-print(h.elements)
-
-while not h.is_empty():
-  print(h.pop())
-  print(h.elements)
