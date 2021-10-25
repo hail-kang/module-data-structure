@@ -24,7 +24,7 @@ class Heap:
 
         i = i_cmp
 
-  def add(self, value):
+  def push(self, value):
     self.elements.append(value)
     
     i = self.length
