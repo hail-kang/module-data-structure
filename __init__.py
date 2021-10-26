@@ -1,1 +1,1 @@
-__all__ = ['hail.datastructure']
+__all__ = ['datastructure']
