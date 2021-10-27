@@ -28,16 +28,22 @@ class BST:
     if node == None:
       raise Exception("Can't find value")
 
-    while node != None:
-      if node.right == None:
-        if node.left == None:
-          break
-        else:
-          node.value = node.left.value
-          node = node.left
+    next_node = node
+    while next_node.left != None or next_node.right != None:
+      node = next_node
+      if next_node.right != None:
+        next_node.value = next_node.right.value
+        next_node = next_node.right
       else:
-        node.value = node.right.value
-        node = node.right
+        next_node.value = node.left.value
+        next_node = next_node.left
+      
+    if self.root == next_node:
+      self.root = None
+    elif node.left == next_node:
+      node.left = None
+    else:
+      node.right = None
 
   def search(self, value):
       next_node = self.root
@@ -50,5 +56,4 @@ class BST:
         else:
           next_node = node.right
       return None
-
 
