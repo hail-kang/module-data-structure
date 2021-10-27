@@ -57,3 +57,27 @@ class BST:
           next_node = node.right
       return None
 
+  def traversal(self, order='preorder', start=None):
+    if start == None:
+      node = self.root
+    else:
+      node = start
+    
+    if order == 'preorder':
+      if node.left != None:
+        self.traversal(order, node.left)
+      print(node.value)
+      if node.right != None:
+        self.traversal(order, node.right)
+    elif order == 'inorder':
+      print(node.value)
+      if node.left != None:
+        self.traversal(order, node.left)
+      if node.right != None:
+        self.traversal(order, node.right)
+    elif order == 'postorder':
+      if node.left != None:
+        self.traversal(order, node.left)
+      if node.right != None:
+        self.traversal(order, node.right)
+      print(node.value)
