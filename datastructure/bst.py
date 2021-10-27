@@ -13,12 +13,12 @@ class BST:
       next_node = self.root
       while next_node != None:
         node = next_node
-        if value < node.value:
+        if (value < node.value) ^ self.reverse:
           next_node = node.left
         else:
           next_node = node.right
 
-      if value < node.value:
+      if (value < node.value) ^ self.reverse:
         node.left = Node(value)
       else:
         node.right = Node(value)
@@ -51,7 +51,7 @@ class BST:
         node = next_node
         if value == node.value:
           return node
-        elif value < node.value:
+        elif (value < node.value) ^ self.reverse:
           next_node = node.left
         else:
           next_node = node.right
