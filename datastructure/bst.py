@@ -24,26 +24,52 @@ class BST:
         node.right = Node(value)
 
   def delete(self, value):
-    node = self.search(value)
+    node = self.root
+    if node == None:
+      raise Exception("Empty Error")
+
+    parent_node = node
+    while node != None:
+      if value == node.value:
+        break
+      elif value < node.value:
+        parent_node = node
+        node = node.left
+      else:
+        parent_node = node
+        node = node.right
+
     if node == None:
       raise Exception("Can't find value")
-
-    next_node = node
-    while next_node.left != None or next_node.right != None:
-      node = next_node
-      if next_node.right != None:
-        next_node.value = next_node.right.value
-        next_node = next_node.right
+    
+    if node.left == None and node.right == None:
+      if parent_node.left == node:
+        parent_node.left = None
       else:
-        next_node.value = node.left.value
-        next_node = next_node.left
-      
-    if self.root == next_node:
-      self.root = None
-    elif node.left == next_node:
-      node.left = None
+        parent_node.right = None
+    elif node.left != None and node.right == None:
+      if parent_node.left == node:
+        parent_node.left = node.left
+      else:
+        parent_node.right = node.left
+    elif node.left == None and node.right != None:
+      if parent_node.left == node:
+        parent_node.left = node.right
+      else:
+        parent_node.right = node.right
     else:
-      node.right = None
+      parent_temp = node
+      temp = node.left
+      while temp.right != None:
+        parent_temp = temp
+        temp = temp.right
+      if temp.left == None:
+        node.value = temp.value
+        parent_temp.right = None
+      else:
+        node.value = temp.value
+        temp.value = temp.left.value
+        temp.left = None
 
   def search(self, value):
       next_node = self.root
