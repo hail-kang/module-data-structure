@@ -32,7 +32,7 @@ class BST:
     while node != None:
       if value == node.value:
         break
-      elif value < node.value:
+      elif (value < node.value) ^ self.reverse:
         parent_node = node
         node = node.left
       else:
