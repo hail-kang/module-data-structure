@@ -15,3 +15,6 @@ class AVL:
 
   def search(self, value):
     pass
+
+  def __depth(self, node):
+    pass
