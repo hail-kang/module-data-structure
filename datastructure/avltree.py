@@ -1,14 +1,14 @@
 from .node import Node
+from .bst import BST
 
 class AVL:
 
   def __init__(self, reverse=False):
-    self.root = None
+    self.bst = BST()
     self.reverse = reverse
 
   def insert(self, value):
-    if self.root == None:
-      self.root = Node(value)
+    self.bst.insert(value)
 
   def delete(self, value):
     pass
@@ -17,29 +17,4 @@ class AVL:
     pass
 
   def traversal(self, order='inorder', start=None):
-    if start == None:
-      node = self.root
-    else:
-      node = start
-    
-    if order == 'preorder':
-      print(node.value)
-      if node.left != None:
-        self.traversal(order, node.left)
-      if node.right != None:
-        self.traversal(order, node.right)
-    elif order == 'inorder':
-      if node.left != None:
-        self.traversal(order, node.left)
-      print(node.value)
-      if node.right != None:
-        self.traversal(order, node.right)
-    elif order == 'postorder':
-      if node.left != None:
-        self.traversal(order, node.left)
-      if node.right != None:
-        self.traversal(order, node.right)
-      print(node.value)
-
-  def __depth(self, node):
-    pass
+    self.bst.traversal(order, start)
