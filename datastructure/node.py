@@ -6,23 +6,23 @@ class Node:
     self.right = right
     self.parent = parent
   
-  def getDepth(self):
+  def get_depth(self):
     if self.left == None and self.right == None:
       return 0
     elif self.left != None and self.right == None:
-      return self.left.depth()
+      return self.left.get_depth()
     elif self.left == None and self.right != None:
-      return self.right.depth()
+      return self.right.get_depth()
     else:
-      return max(self.left.depth(), self.right.depth())
+      return max(self.left.get_depth(), self.right.get_depth())
     
-  def getBalanceFactor(self):
+  def get_balance_factor(self):
     if self.left == None and self.right == None:
       return 0
     elif self.left != None and self.right == None:
-      return self.left.depth()
+      return self.left.get_depth()
     elif self.left == None and self.right != None:
-      return -self.right.depth()
+      return -self.right.get_depth()
     else:
-      return self.left.depth() - self.right.depth()
+      return self.left.get_depth() - self.right.get_depth()
       
