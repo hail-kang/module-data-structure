@@ -19,9 +19,9 @@ class BST:
           next_node = node.right
 
       if (value < node.value) ^ self.reverse:
-        node.left = Node(value)
+        node.left = Node(value, None, None, node)
       else:
-        node.right = Node(value)
+        node.right = Node(value, None, None, node)
 
   def delete(self, value):
     node = self.root
