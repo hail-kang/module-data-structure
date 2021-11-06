@@ -108,7 +108,7 @@ class AVL:
     pass
 
   def search(self, value):
-    pass
+    return self.bst.search(value)
 
   def traversal(self, order='inorder', start=None):
     self.bst.traversal(order, start)
