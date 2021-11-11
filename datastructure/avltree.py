@@ -11,7 +11,19 @@ class AVL:
 
   def insert(self, value):
     self.bst.insert(value)
+    self.__balancing()
 
+  def delete(self, value):
+    self.bst.delete(value)
+    self.__balancing()
+
+  def search(self, value):
+    return self.bst.search(value)
+
+  def traversal(self, order='inorder', start=None):
+    self.bst.traversal(order, start)
+
+  def __balancing(self):
     deq = deque([self.bst.root])
     x = y = z = None
     while len(deq) > 0:
@@ -103,12 +115,3 @@ class AVL:
       a.right = T1
       b.left = T2
       b.right = T3
-
-  def delete(self, value):
-    pass
-
-  def search(self, value):
-    return self.bst.search(value)
-
-  def traversal(self, order='inorder', start=None):
-    self.bst.traversal(order, start)
