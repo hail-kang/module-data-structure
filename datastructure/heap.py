@@ -6,6 +6,25 @@ class Heap:
 
     self.__heapify()
 
+  def __down_heap(self, i):
+    left = i*2 + 1
+    right = i*2 + 2
+
+    if left < self.length and (self.elements[left] < self.elements[i]) ^ self.reverse:
+      priority = left
+    else:
+      priority = i
+    
+    if right < self.length and (self.elements[right] < self.elements[i]) ^ self.reverse:
+      priority = right
+
+    if priority != i:
+      temp = self.elements[priority]
+      self.elements[priority] = self.elements[i]
+      self.elements[i] = temp
+
+      self.__down_heap(priority)
+
   def __heapify(self):
     for i in reversed(range(self.length // 2)):
       while i < self.length:
